@@ -1,0 +1,20 @@
+1. create a model called as Ticket
+      -customerId -
+      -departmentId-
+      -employeesId
+      -title
+      -message
+      -isResolved - false - Boolean
+      - priority - 
+      - createdAt
+      - code
+
+2. GET/ tickets
+   POST/tickets
+   GET/tickets/:id
+   PUT/tickets/:id
+   DELETE/tickets/soft_delete/:id
+          - updating the isDeleted - true
+   DELETE/tickets/:id
+
+   
