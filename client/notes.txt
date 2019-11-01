@@ -1,0 +1,9 @@
+1. In config folder ->  we create axios file. (import axios)
+                        creating a instance, in that (we have baseURL)
+                    ->  by doing this , i need not pass the entire URL
+        
+2. -> axios is a package.
+
+3. wherever u import axios, u do not directly import that particular pacakage , but u want to import the object that u exporting from ur axios.js folder.
+
+4. 

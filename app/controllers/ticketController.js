@@ -1,9 +1,10 @@
 const Ticket = require("../models/tickets");
 
 module.exports.list = (req, res) => {
-  Ticket.find()
+  Ticket.find({ userId: req.user._id })
     .populate("departmentId")
     .populate("customerId")
+    .populate("employeesId")
     .then(ticket => {
       res.json(ticket);
     })
@@ -14,7 +15,7 @@ module.exports.list = (req, res) => {
 
 module.exports.create = (req, res) => {
   const body = req.body;
-  const ticket = new Ticket(body);
+  const ticket = new Ticket({ ...body, userId: req.user._id });
   ticket
     .save()
     .then(ticket => {
@@ -27,7 +28,7 @@ module.exports.create = (req, res) => {
 
 module.exports.show = (req, res) => {
   const id = req.params.id;
-  Ticket.findById(id)
+  Ticket.findOne({ _id: id, userId: req.user._id })
     .populate("departmentId", ["name"])
     .then(ticket => {
       if (ticket) {
@@ -43,7 +44,7 @@ module.exports.show = (req, res) => {
 
 module.exports.destroy = (req, res) => {
   const id = req.params.id;
-  Ticket.findByIdAndDelete(id)
+  Ticket.findOneAndDelete({ _id: id, userId: req.user._id })
     .then(ticket => {
       if (ticket) {
         res.json(ticket);
@@ -59,7 +60,9 @@ module.exports.destroy = (req, res) => {
 module.exports.update = (req, res) => {
   const id = req.params.id;
   const body = req.body;
-  Ticket.findByIdAndUpdate(id, body, { new: true })
+  Ticket.findOneAndUpdate({ _id: id, userId: req.user._id }, body, {
+    new: true
+  })
     .then(ticket => {
       res.json(ticket);
     })
@@ -70,7 +73,11 @@ module.exports.update = (req, res) => {
 module.exports.softdestory = (req, res) => {
   const id = req.params.id;
   //const body = req.body;
-  Ticket.findByIdAndUpdate(id, { isDeleted: true }, { new: true })
+  Ticket.findOneAndUpdate(
+    { _id: id, userId: req.user.id },
+    { isDeleted: true },
+    { new: true }
+  )
     .then(ticket => {
       res.json(ticket);
     })

@@ -10,7 +10,14 @@ const customerSchema = new Schema({
     type: String
   },
   mobile: {
-    type: String
+    type: String,
+    minlength: 10,
+    maxlength: 10
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true
   }
 });
 

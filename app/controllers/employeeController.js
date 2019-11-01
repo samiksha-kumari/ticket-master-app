@@ -2,10 +2,12 @@ const Employee = require("../models/employee");
 
 //list
 module.exports.list = (req, res) => {
-  Employee.find()
-    .then(employees => {
-      res.json(employees);
-    })
+  Employee.find({ userId: req.user._id })
+    .populate("departmentId", ["name"])
+    .then(employees =>
+      // console.log(employees);
+      res.json(employees)
+    )
     .catch(err => {
       console.log(err);
     });
@@ -15,11 +17,12 @@ module.exports.list = (req, res) => {
 module.exports.create = (req, res) => {
   const body = req.body;
   console.log(body);
-  const employee = new Employee({
-    name: body.name,
-    email: body.email,
-    mobile: body.mobile
-  });
+  const employee = new Employee({ ...body, userId: req.user._id });
+  // name: body.name,
+  // email: body.email,
+  // mobile: body.mobile,
+  // departmentId: body.departmentId
+
   employee
     .save()
     .then(employee => {
@@ -33,7 +36,7 @@ module.exports.create = (req, res) => {
 //show-one employees
 module.exports.show = (req, res) => {
   const id = req.params.id;
-  Employee.findById(id).then(employee => {
+  Employee.findOne({ _id: id, userId: req.user._id }).then(employee => {
     if (employee) {
       res.json(employee);
     } else {
@@ -45,7 +48,7 @@ module.exports.show = (req, res) => {
 //destroy-one employee
 module.exports.destroy = (req, res) => {
   const id = req.params.id;
-  Employee.findByIdAndDelete(id)
+  Employee.findOneAndDelete({ _id: id, userId: req.user._id })
     .then(employee => {
       if (employee) {
         res.json(employee);
@@ -62,7 +65,9 @@ module.exports.destroy = (req, res) => {
 module.exports.update = (req, res) => {
   const id = req.params.id;
   const body = req.body;
-  Employee.findByIdAndUpdate(id, body, { new: true }).then(employee => {
+  Employee.findOneAndUpdate({ _id: id, userId: req.user._id }, body, {
+    new: true
+  }).then(employee => {
     if (employee) {
       res.json(employee);
     } else {

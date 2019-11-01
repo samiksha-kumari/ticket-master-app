@@ -3,16 +3,25 @@ const router = require("./config/routes");
 const app = express();
 const mongoose = require("./config/database");
 const port = 3010;
+const cors = require("cors");
+const path = require("path");
 
 app.use(express.json());
+app.use(cors());
 
 //one route set up
-app.get("/", (req, res) => {
-  res.send("welcome to Ticket Master App");
+// app.get("/", (req, res) => {
+//   res.send("welcome to Ticket Master App");
+// });
+
+app.use("/api", router);
+
+//
+app.use(express.static(path.join(__dirname, "client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
-app.use("/", router);
-
-app.listen(port, () => {
-  console.log("listening a port", port);
+app.listen(process.env.PORT || port, () => {
+  console.log("listening a port");
 });

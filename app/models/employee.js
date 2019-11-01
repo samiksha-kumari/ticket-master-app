@@ -10,14 +10,22 @@ const employeeSchema = new Schema({
     type: String
   },
   mobile: {
-    type: String
+    type: String,
+    minlength: 10,
+    maxlength: 10
   },
-  department: {
+  departmentId: {
     type: Schema.Types.ObjectId,
-    ref: "Department" //model
+    ref: "Department", //model
+    required: true
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true
   }
 });
 
-const Employee = mongoose.model("employees", employeeSchema);
+const Employee = mongoose.model("Employee", employeeSchema);
 
 module.exports = Employee;

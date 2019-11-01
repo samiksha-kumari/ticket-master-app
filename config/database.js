@@ -3,9 +3,12 @@ const mongoose = require("mongoose"); //we have to reference it
 //db configuration
 mongoose.Promise = global.Promise;
 mongoose
-  .connect("mongodb://localhost:27017/ticket-master-bk", {
-    useNewUrlParser: true
-  })
+  .connect(
+    process.env.MONGODB_URI || "mongodb://localhost:27017/ticket-master-bk",
+    {
+      useNewUrlParser: true
+    }
+  )
   .then(() => {
     console.log("successfully connected to db");
   })
