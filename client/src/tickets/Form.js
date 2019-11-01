@@ -23,7 +23,7 @@ export default class TicketsForm extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/customers", {
+      .get("/api/customers", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -37,7 +37,7 @@ export default class TicketsForm extends React.Component {
 
         this.setState({ customers: arr });
         axios
-          .get("/departments", {
+          .get("/api/departments", {
             headers: {
               "x-auth": localStorage.getItem("token")
             }
@@ -56,7 +56,7 @@ export default class TicketsForm extends React.Component {
           });
       });
     axios
-      .get("/employees", {
+      .get("/api/employees", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }

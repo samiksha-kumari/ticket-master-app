@@ -14,7 +14,7 @@ export default class TicketsList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/tickets", {
+      .get("/api/tickets", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -32,7 +32,7 @@ export default class TicketsList extends React.Component {
   handleRemove = id => {
     if (window.confirm("Are You Sure?")) {
       axios
-        .delete(`/tickets/${id}`, {
+        .delete(`/api/tickets/${id}`, {
           headers: {
             "x-auth": localStorage.getItem("token")
           }
