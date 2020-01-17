@@ -48,10 +48,10 @@ module.exports.account = (req, res) => {
 module.exports.logout = (req, res) => {
   const { user, token } = req;
   User.findByIdAndUpdate(user._id, { $pull: { tokens: { token: token } } })
-    .then(function() {
+    .then(function () {
       res.send({ notice: "successfully logged out" });
     })
-    .catch(function(err) {
+    .catch(function (err) {
       res.send(err);
     });
 };

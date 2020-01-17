@@ -13,7 +13,7 @@ export default class TicketsShow extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     axios
-      .get(`/api/tickets/${id}`, {
+      .get(`/tickets/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }

@@ -26,8 +26,9 @@ class Register extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-    axios.post("/api/users/register", formData).then(users => {
-      this.props.history.push("/login");
+
+    axios.post("/users/register", formData).then(users => {
+      this.props.history.push("/users/login");
     });
     console.log(formData);
   };
@@ -36,8 +37,6 @@ class Register extends React.Component {
     console.log("form render");
     return (
       <div className="justify-content-md-center">
-        <h1 className="h1 mb-3 font-weight-normal text-center">Register</h1>
-
         <form className="form-signin" onSubmit={this.handleSubmit}>
           <label className="sr-only" htmlFor="username">
             username

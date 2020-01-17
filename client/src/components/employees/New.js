@@ -13,7 +13,7 @@ class EmployeeNew extends React.Component {
   handleAddEmployee = employee => {
     console.log("got it ", employee);
     axios
-      .post("/api/employees", employee, {
+      .post("/employees", employee, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }

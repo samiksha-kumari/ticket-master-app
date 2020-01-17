@@ -6,7 +6,7 @@ import { resetUser } from "../actions/user";
 class Logout extends React.Component {
   componentDidMount() {
     axios
-      .delete("/api/users/logout", {
+      .delete("/users/logout", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }

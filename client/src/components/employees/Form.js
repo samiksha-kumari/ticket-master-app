@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "../../config/axios";
 import { Button, FormGroup, Form, Label, Input } from "reactstrap";
+import Select from 'react-select'
 
 class EmployeeForm extends React.Component {
   constructor(props) {
@@ -9,14 +10,14 @@ class EmployeeForm extends React.Component {
       name: props.employee ? props.employee.name : "",
       email: props.employee ? props.employee.email : "",
       mobile: props.employee ? props.employee.mobile : "",
-      department: props.employee ? this.props.employee.department : "",
+      department: props.employee ? this.props.employee.department : { value: null, label: null },
       departments: []
     };
   }
 
   componentDidMount() {
     axios
-      .get("/api/departments", {
+      .get("/departments", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -94,27 +95,17 @@ class EmployeeForm extends React.Component {
             <br />
             <Label>
               Department
-              <select
+                <Select
                 id="inputState"
-                className="form-control"
                 value={this.state.department}
                 onChange={this.handleChange}
+                options={this.state.departments.map(c => ({ value: c._id, label: c.name }))}
                 name="department"
-              >
-                <option selected>select</option>
-                {this.state.departments.map(department => {
-                  return (
-                    <option key={department._id} value={department._id}>
-                      {department.name}
-                    </option>
-                  );
-                })}
-              </select>
+              />
             </Label>
 
             <br />
-            <Button color="primary" type="submit">
-              Add
+            <Button color="primary" type="submit">submit
             </Button>
           </FormGroup>
         </Form>

@@ -13,7 +13,7 @@ export default class CustomerShow extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     axios
-      .get(`/api/customers/${id}`, {
+      .get(`/customers/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -31,12 +31,14 @@ export default class CustomerShow extends React.Component {
   render() {
     return (
       <div>
-        <h2>
-          {this.state.customer.name} - {this.state.customer.email}
-        </h2>
-        <h5>
-          <Link to={`/customers/edit/${this.state.customer._id}`}>edit</Link>{" "}
-        </h5>
+        <h2 >Show Customer</h2> <hr />
+        <h3>
+          {this.state.customer.name}
+        </h3>
+        <h3> {this.state.customer.email}</h3>
+
+        <Link to={`/customers/edit/${this.state.customer._id}`}>Edit Customer</Link>{" "}
+
       </div>
     );
   }

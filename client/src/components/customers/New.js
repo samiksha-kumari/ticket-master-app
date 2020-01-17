@@ -13,7 +13,7 @@ class CustomerNew extends React.Component {
 
   handleCustomerSubmit(customer) {
     axios
-      .post("/api/customers", customer, {
+      .post("/customers", customer, {
         //https://dct-ticket-master.herokuapp.com/customers
         headers: {
           "x-auth": localStorage.getItem("token")
@@ -21,9 +21,9 @@ class CustomerNew extends React.Component {
       })
       .then(response => {
         if (response.data.errors) {
-          console.log("validation error", response.data.errors);
+          alert("validation error", response.data.errors);
         } else {
-          console.log("success");
+          alert("success");
           this.props.history.push("/customers");
         }
       })

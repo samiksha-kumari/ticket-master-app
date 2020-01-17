@@ -11,11 +11,11 @@ export default function CustomerItem(props) {
         <Link to={`/customers/${id}`}>{name}</Link>
       </td>
       <td> {email}</td>
-      <td>{mobile}</td>
+      <td >{mobile} </td>
       <td>
         <Button
           onClick={() => {
-            const confirm = window.confirm("Are You Sure?");
+            const confirm = window.confirm("Are You Sure Want To Remove?");
             if (confirm) {
               handleRemove(id);
             }

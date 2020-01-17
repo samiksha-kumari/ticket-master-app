@@ -21,7 +21,7 @@ const ele = (
 
 if (localStorage.getItem("token")) {
   axios
-    .get("/api/users/account", {
+    .get("/users/account", {
       headers: {
         "x-auth": localStorage.getItem("token")
       }

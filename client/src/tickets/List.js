@@ -14,7 +14,7 @@ export default class TicketsList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/api/tickets", {
+      .get("/tickets", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -32,7 +32,7 @@ export default class TicketsList extends React.Component {
   handleRemove = id => {
     if (window.confirm("Are You Sure?")) {
       axios
-        .delete(`/api/tickets/${id}`, {
+        .delete(`/tickets/${id}`, {
           headers: {
             "x-auth": localStorage.getItem("token")
           }
@@ -41,7 +41,7 @@ export default class TicketsList extends React.Component {
           if (response.data._id) {
             this.setState(prevState => {
               return {
-                tickets: prevState.tickets.filter(ticket => ticket._id != id)
+                tickets: prevState.tickets.filter(ticket => ticket._id !== id)
               };
             });
           }
@@ -79,9 +79,7 @@ export default class TicketsList extends React.Component {
             })}
           </tbody>
         </Table>
-        <h5>
-          <Link to="/tickets/new">Add tickets </Link>
-        </h5>
+        <Link to="/tickets/new">Add tickets </Link>
       </div>
     );
   }

@@ -12,7 +12,7 @@ export default class CustomerEdit extends React.Component {
   handleCustomerSubmit = customer => {
     console.log("edit", customer);
     axios
-      .put(`/api/customers/${customer.id}`, customer, {
+      .put(`/customers/${customer.id}`, customer, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -33,7 +33,7 @@ export default class CustomerEdit extends React.Component {
     console.log("edit customer component did mount");
     const id = this.props.match.params.id;
     axios
-      .get(`/api/customers/${id}`, {
+      .get(`/customers/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -46,7 +46,7 @@ export default class CustomerEdit extends React.Component {
   render() {
     return (
       <div>
-        <h2>Edit Customer</h2>
+        <h2>Edit your details</h2>
         {Object.keys(this.state.customer).length !== 0 && (
           <CustomerForm
             customer={this.state.customer}
@@ -54,10 +54,6 @@ export default class CustomerEdit extends React.Component {
           />
         )}
 
-        {/* <CustomerForm
-          customer={this.state.customer}
-          handleCustomerSubmit={this.handleSubmit}
-        /> */}
       </div>
     );
   }

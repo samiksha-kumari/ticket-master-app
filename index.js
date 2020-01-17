@@ -9,18 +9,20 @@ const path = require("path");
 app.use(express.json());
 app.use(cors());
 
-//one route set up
-// app.get("/", (req, res) => {
-//   res.send("welcome to Ticket Master App");
-// });
+// one route set up
+app.get("/", (req, res) => {
+  res.send("welcome to Ticket Master App");
+});
 
-app.use("/api", router);
+app.use("/", router);
 
 //
-app.use(express.static(path.join(__dirname, "client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static(path.join(__dirname, "client/build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname + "/client/build/index.html"));
+//   });
+// }
 
 app.listen(process.env.PORT || port, () => {
   console.log("listening a port");

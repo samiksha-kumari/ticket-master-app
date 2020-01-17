@@ -64,9 +64,7 @@ class CustomerForm extends React.Component {
                 name="name"
               />
             </Label>
-          </FormGroup>
-          <br />
-          <FormGroup>
+            <br />
             <Label>
               Email
               <Input
@@ -76,9 +74,7 @@ class CustomerForm extends React.Component {
                 name="email"
               />
             </Label>
-          </FormGroup>
-          <br />
-          <FormGroup>
+            <br />
             <Label>
               Mobile
               <Input

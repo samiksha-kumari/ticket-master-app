@@ -23,6 +23,7 @@ import Login from "./user-auth/Login";
 import Register from "./user-auth/Register";
 import Logout from "./user-auth/Logout";
 
+
 import { connect } from "react-redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
@@ -35,9 +36,15 @@ function App(props) {
       <div>
         <Navbar color="light" light expand="md" className="mb-5">
           <NavbarBrand>Ticket Master</NavbarBrand>
+
           <Nav className="ml-auto">
-            {Object.keys(props.user).length == 0 ? (
+            {!(localStorage.getItem('token') == props.user.token) ? (
               <React.Fragment>
+                <NavItem>
+                  <Link className="nav-link text-primary" to="">
+                    Home
+                  </Link>
+                </NavItem>
                 <NavItem>
                   <Link className="nav-link text-primary" to="/users/login">
                     Login
@@ -51,44 +58,44 @@ function App(props) {
                 </NavItem>
               </React.Fragment>
             ) : (
-              <React.Fragment>
-                <NavItem>
-                  <Link className="nav-link text-primary" to="/">
-                    Home
+                <React.Fragment>
+                  <NavItem>
+                    <Link className="nav-link text-primary" to="/">
+                      Home
                   </Link>
-                </NavItem>
+                  </NavItem>
 
-                <NavItem>
-                  <Link className="nav-link text-primary" to="/customers">
-                    Customers
+                  <NavItem>
+                    <Link className="nav-link text-primary" to="/customers">
+                      Customers
                   </Link>
-                </NavItem>
+                  </NavItem>
 
-                <NavItem>
-                  <Link className="nav-link text-primary" to="/departments">
-                    Departments
+                  <NavItem>
+                    <Link className="nav-link text-primary" to="/departments">
+                      Departments
                   </Link>
-                </NavItem>
+                  </NavItem>
 
-                <NavItem>
-                  <Link className="nav-link text-primary" to="/employees">
-                    Employees
+                  <NavItem>
+                    <Link className="nav-link text-primary" to="/employees">
+                      Employees
                   </Link>
-                </NavItem>
+                  </NavItem>
 
-                <NavItem>
-                  <Link className="nav-link text-primary" to="/tickets">
-                    Tickets
+                  <NavItem>
+                    <Link className="nav-link text-primary" to="/tickets">
+                      Tickets
                   </Link>
-                </NavItem>
+                  </NavItem>
 
-                <NavItem>
-                  <Link className="nav-link text-primary" to="/users/logout">
-                    Logout
+                  <NavItem>
+                    <Link className="nav-link text-primary" to="/users/logout">
+                      Logout
                   </Link>
-                </NavItem>
-              </React.Fragment>
-            )}
+                  </NavItem>
+                </React.Fragment>
+              )}
           </Nav>
         </Navbar>
 
@@ -115,6 +122,7 @@ function App(props) {
             <Route path="/users/logout" component={Logout} />
           </Switch>
         </div>
+
       </div>
     </BrowserRouter>
   );

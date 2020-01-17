@@ -10,7 +10,7 @@ export const setUser = user => {
 
 export const startSetUser = formData => {
   return dispatch => {
-    axios.post("/api/users/login", formData).then(response => {
+    axios.post("/users/login", formData).then(response => {
       if (response.data.hasOwnProperty("errors")) {
         alert(response.data.errors);
       } else {

@@ -15,7 +15,7 @@ class CustomersList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/api/customers", {
+      .get("/customers", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -37,7 +37,7 @@ class CustomersList extends React.Component {
 
   handleRemove(id) {
     axios
-      .delete(`/api/customers/${id}`, {
+      .delete(`/customers/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -66,11 +66,11 @@ class CustomersList extends React.Component {
         <Table striped>
           <thead>
             <tr>
-              <th> id </th>
-              <th> name </th>
-              <th> email </th>
-              <th> mobile </th>
-              <th> actions </th>
+              <th> Id </th>
+              <th> Name </th>
+              <th> Email </th>
+              <th> Mobile </th>
+              <th> Actions </th>
             </tr>
           </thead>
           <tbody>
@@ -89,9 +89,9 @@ class CustomersList extends React.Component {
             })}
           </tbody>
         </Table>
-        <h5>
-          <Link to="/customers/new">Add Customer</Link>
-        </h5>
+
+        <Link to="/customers/new">Add Customer</Link>
+
       </div>
     );
   }

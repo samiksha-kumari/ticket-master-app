@@ -13,7 +13,7 @@ export default class EmployeeShow extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     axios
-      .get(`/api/employees/${id}`, {
+      .get(`/employees/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -30,15 +30,12 @@ export default class EmployeeShow extends React.Component {
   render() {
     return (
       <div>
-        <h2>{this.state.employee.name}</h2>
-        <p>
-          {this.state.employee._id} - {this.state.employee.email} -
-          {this.state.employee.mobile}
-        </p>
-
-        <h5>
-          <Link to={`/employees/edit/${this.state.employee._id}`}>edit</Link>
-        </h5>
+        <h2>show employee</h2><hr />
+        <h3>{this.state.employee.name}</h3>
+        <h4>id:-{this.state.employee._id}</h4>
+        <h4>email:-{this.state.employee.email}</h4>
+        <h4>mobile:-{this.state.employee.mobile}</h4>
+        <Link to={`/employees/edit/${this.state.employee._id}`}>Edit Employee</Link>
       </div>
     );
   }

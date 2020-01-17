@@ -1,6 +1,4 @@
 import React from "react";
-import { Button } from "reactstrap";
-import { Form, FormGroup, Label, Input, Row } from "reactstrap";
 
 export default class DepartmentForm extends React.Component {
   constructor() {
@@ -27,21 +25,13 @@ export default class DepartmentForm extends React.Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleSubmit}>
-          <Label htmlFor="name">name:</Label>
-          <FormGroup>
-            <Input
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-              id="name"
-            ></Input>
-          </FormGroup>
 
-          <Button color="btn btn-primary" type="submit">
-            Add
-          </Button>
-        </Form>
+        <form onSubmit={this.handleSubmit}>
+          <label> <h4>Add Department</h4>
+            <input type="text" required className="form-control" value={this.state.name} onChange={this.handleChange} id="name" />
+          </label>
+          <input className="btn btn-primary" type="submit" value="Add" />
+        </form>
       </div>
     );
   }

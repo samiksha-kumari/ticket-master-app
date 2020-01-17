@@ -19,10 +19,10 @@ const userSchema = new Schema({
     //how to chk the format of the email
 
     validate: {
-      validator: function(value) {
+      validator: function (value) {
         return validator.isEmail(value);
       },
-      message: function() {
+      message: function () {
         return "invalid email format";
       }
     }
@@ -47,11 +47,11 @@ const userSchema = new Schema({
 });
 
 // pre hooks
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function (next) {
   const user = this; // never use arrow function bz his should refer the object
   if (user.isNew) {
-    bcryptjs.genSalt(10).then(function(salt) {
-      bcryptjs.hash(user.password, salt).then(function(encryptedPassword) {
+    bcryptjs.genSalt(10).then(function (salt) {
+      bcryptjs.hash(user.password, salt).then(function (encryptedPassword) {
         user.password = encryptedPassword;
         next();
       });
@@ -62,35 +62,35 @@ userSchema.pre("save", function(next) {
 });
 
 //own static method
-userSchema.statics.findByCredentials = function(email, password) {
+userSchema.statics.findByCredentials = function (email, password) {
   const User = this;
-  return User.findOne({ email }).then(function(user) {
+  return User.findOne({ email }).then(function (user) {
     if (!user) {
       return Promise.reject("invalid email / password");
     }
     return bcryptjs
       .compare(password, user.password) //it extracts th same salt value and generate the same encrypted password
-      .then(function(result) {
+      .then(function (result) {
         if (result) {
           return Promise.resolve(user);
         } else {
           return Promise.reject("invalid email /password");
         }
       })
-      .catch(function(err) {
+      .catch(function (err) {
         return Promise.reject(err);
       });
   });
 };
 
 //find by token
-userSchema.statics.findByToken = function(token) {
+userSchema.statics.findByToken = function (token) {
   // const User = this;
   let tokenData;
-  console.log(token);
+  console.log('chu', token);
   try {
     tokenData = jwt.verify(token, "jwt@456");
-    console.log("token ", tokenData);
+    console.log("token", tokenData);
   } catch (err) {
     console.log("hfsjh", err);
     return Promise.reject(err);
@@ -107,7 +107,7 @@ userSchema.statics.findByToken = function(token) {
 // pre remove
 
 //own instance methods
-userSchema.methods.generateToken = function() {
+userSchema.methods.generateToken = function () {
   const user = this;
   const tokenData = {
     _id: user._id,

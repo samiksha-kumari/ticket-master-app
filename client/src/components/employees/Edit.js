@@ -12,7 +12,7 @@ export default class EmployeeEdit extends React.Component {
   handleEmployeeSubmit = employee => {
     console.log("edit", employee);
     axios
-      .put(`/api/employees/${employee.id}`, employee, {
+      .put(`/employees/${employee.id}`, employee, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -33,7 +33,7 @@ export default class EmployeeEdit extends React.Component {
     console.log("edit employees component did mount");
     const id = this.props.match.params.id;
     axios
-      .get(`/api/employees/${id}`, {
+      .get(`/employees/${id}`, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -48,7 +48,7 @@ export default class EmployeeEdit extends React.Component {
     if (this.state.employee.name) {
       return (
         <div>
-          <h2>Edit Employee</h2>
+          <h2>Edit your details</h2>
           <EmployeeForm
             employee={this.state.employee}
             handleEmployeeSubmit={this.handleEmployeeSubmit}

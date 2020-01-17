@@ -23,7 +23,7 @@ export default class TicketsForm extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/api/customers", {
+      .get("/customers", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -37,7 +37,7 @@ export default class TicketsForm extends React.Component {
 
         this.setState({ customers: arr });
         axios
-          .get("/api/departments", {
+          .get("/departments", {
             headers: {
               "x-auth": localStorage.getItem("token")
             }
@@ -56,7 +56,7 @@ export default class TicketsForm extends React.Component {
           });
       });
     axios
-      .get("/api/employees", {
+      .get("/employees", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -78,12 +78,12 @@ export default class TicketsForm extends React.Component {
   };
 
   handleSelect = props => {
-    if (props.name == "customers") {
+    if (props.name === "customers") {
       this.setState({ customer: props.value });
-    } else if (props.name == "departments") {
+    } else if (props.name === "departments") {
       let dummy = [];
       this.state.employees.forEach(data => {
-        if (data.departmentId._id == props.value) {
+        if (data.departmentId._id === props.value) {
           dummy.push({ value: data._id, label: data.name });
         }
       });

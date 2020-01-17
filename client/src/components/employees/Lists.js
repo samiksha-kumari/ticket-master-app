@@ -14,7 +14,7 @@ export default class EmployeeList extends React.Component {
 
   componentDidMount() {
     axios
-      .get("/api/employees", {
+      .get("/employees", {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
@@ -34,7 +34,7 @@ export default class EmployeeList extends React.Component {
   handleRemove = id => {
     if (window.confirm("Are you Sure?")) {
       axios
-        .delete(`/api/employees/${id}`, {
+        .delete(`/employees/${id}`, {
           headers: {
             "x-auth": localStorage.getItem("token")
           }
@@ -98,9 +98,9 @@ export default class EmployeeList extends React.Component {
             })}
           </tbody>
         </Table>
-        <h5>
-          <Link to="/employees/new">Add Employee</Link>
-        </h5>
+
+        <Link to="/employees/new">Add Employee</Link>
+
       </div>
     );
   }

@@ -13,7 +13,7 @@ class TicketsNew extends React.Component {
   handleTicketSubmit = ticket => {
     const _this = this;
     axios
-      .post("/api/tickets", ticket, {
+      .post("/tickets", ticket, {
         headers: {
           "x-auth": localStorage.getItem("token")
         }
