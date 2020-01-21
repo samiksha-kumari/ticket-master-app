@@ -24,7 +24,7 @@ export default class EmployeeEdit extends React.Component {
           console.log("validation error", response.data.errors);
         } else {
           console.log("success", response.data);
-          this.props.history.push(`/employees/${response.data._id}`);
+
         }
       });
   };

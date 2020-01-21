@@ -14,15 +14,15 @@ app.get("/", (req, res) => {
   res.send("welcome to Ticket Master App");
 });
 
-app.use("/", router);
+app.use('/api', router)
 
 //
-// if (process.env.NODE_ENV == "production") {
-//   app.use(express.static(path.join(__dirname, "client/build")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/client/build/index.html"));
-//   });
-// }
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
 
 app.listen(process.env.PORT || port, () => {
   console.log("listening a port");
