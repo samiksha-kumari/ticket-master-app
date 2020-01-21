@@ -10,13 +10,12 @@ app.use(express.json());
 app.use(cors());
 
 // one route set up
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("welcome to Ticket Master App");
 });
 
 app.use('/api', router)
 
-//
 if (process.env.NODE_ENV == "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", (req, res) => {
